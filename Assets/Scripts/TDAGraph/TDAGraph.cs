@@ -2,24 +2,123 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class TDAGraph<T>
+public class TDAGraph
 {
-    public abstract bool Add(T item);
+    public List<TDAVertex> vertexList;
 
-    public abstract bool Remove(T item);
+    public Dictionary<TDAVertex, List<(TDAVertex, int)>> adjacencyList;
 
-    public abstract bool Contains(T item);
+    public List<TDAEdge> edgesList;
 
-    public abstract void Show();
+    public TDAGraph()
+    {
+        Initialize();
+    }
 
-    public abstract int Cardinality();
+    public void Initialize()
+    {
+        vertexList = new List<TDAVertex>();
+        adjacencyList = new Dictionary<TDAVertex, List<(TDAVertex, int)>>();
+        edgesList = new List<TDAEdge>();
+    }
 
-    public abstract bool IsEmpty();
+    public bool AddVertex(int value)
+    {
+        foreach (var vertex in vertexList)
+        {
+            if (vertex.Value == value)
+            {
+                return false;
+            }
+        }
 
-    public abstract TDAGraph<T> Union(TDAGraph<T> otherSet);
+        TDAVertex newVertex = new TDAVertex(value);
+        vertexList.Add(newVertex);
 
-    public abstract TDAGraph<T> Intersection(TDAGraph<T> otherSet);
+        return true;
+    }
 
-    public abstract TDAGraph<T> Difference(TDAGraph<T> otherSet);
+    public bool RemoveVertex(int value)
+    {
+        foreach (var vertex in vertexList)
+        {
+            if (vertex.Value == value)
+            {
+                vertexList.Remove(vertex);
+                adjacencyList.Remove(vertex);
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public TDAVertex FindVertex(int index) 
+    {
+        foreach (var vertex in vertexList)
+        {
+            if (index == vertex.Value)
+            {
+                return vertex;
+            }
+        }
+
+        return null;
+    }
+
+    public void ShowVertices()
+    {
+        foreach (var vertex in vertexList)
+        {
+            Debug.Log("Vertex Value: " + vertex.Value);
+        }
+    }
+
+    public bool AddEdge(int origin, int target, int weight)
+    {
+        if (!FindEdge(origin, target))
+        {
+            TDAEdge newEdge = new TDAEdge(false, FindVertex(origin), FindVertex(target), weight);
+            return true;
+        }
+        return false;
+    }
+
+    public bool RemoveEdge(int origin, int target)
+    {
+        if (FindEdge(origin, target))
+        {
+            edgesList.Remove(GetEdge(origin, target));
+        }
+        return false;
+    }
+
+    public bool FindEdge(int origin, int target)
+    {
+        if (GetEdge(origin, target) != null) return true;
+
+        return false;
+    }
+
+    public TDAEdge GetEdge(int origin, int target)
+    {
+        foreach (var edge in edgesList)
+        {
+            if (edge.origin.Value == origin && edge.target.Value == target)
+            {
+                return edge;
+            }
+        }
+
+        return null;
+    }
+
+    public int GetEdgeWeight(int origin, int target)
+    {
+        if (FindEdge(origin, target))
+        {
+            return GetEdge(origin, target).Weight;
+        }
+
+        return -1;
+    }   
 }

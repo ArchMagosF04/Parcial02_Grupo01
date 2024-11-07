@@ -5,11 +5,11 @@ using UnityEngine;
 public class TDAVertex
 {
     public int Value { get; private set; }
-    public List<TDAEdge> Edges;
+    //public List<TDAEdge> Edges;
 
     public TDAVertex(int value)
     {
         this.Value = value;
-        Edges = new List<TDAEdge>();
+        //Edges = new List<TDAEdge>();
     }
 }

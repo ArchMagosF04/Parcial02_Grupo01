@@ -1,17 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using static UnityEditor.Progress;
 
 public class StaticSet<T> : TDAGroup<T>
 {
-    private int arraySize;
     private T[] elements;
 
     public StaticSet(int arraySize)
     {
-        this.arraySize = arraySize;
         elements = new T[arraySize];
     }
 

@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class TDAVertex
 {
-    public int Value { get; private set; }
-    //public List<TDAEdge> Edges;
+    public int Id { get; private set; }
 
     public TDAVertex(int value)
     {
-        this.Value = value;
-        //Edges = new List<TDAEdge>();
+        this.Id = value;
     }
 }

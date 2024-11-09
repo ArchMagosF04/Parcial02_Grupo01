@@ -47,6 +47,7 @@ public class AVLManager : MonoBehaviour
             inputField.text = "";
 
             DestroyTree();
+            nodeConections.Clear();
             CreateTree(tree.root, transform.position);
         }
     }

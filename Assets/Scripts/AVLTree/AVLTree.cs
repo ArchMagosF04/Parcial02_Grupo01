@@ -1,23 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
-using Unity.PlasticSCM.Editor.WebApi;
-using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine;
+using System;
 
-public class AVLTree
+public class AVLTree : ABBTree
 {
-    public Node root { get; private set; }
-
-    private Node selectedParentNode;
-
-    public void Insert(int value)
-    {
-        root = Insert(root, value, 0);
-    }
-
-    private Node Insert(Node node, int value, int depth)
+    protected override Node Insert(Node node, int value, int depth)
     {
         if (node == null)
         {
@@ -39,7 +27,7 @@ public class AVLTree
             return node;
         }
 
-        node.Height = 1 + Mathf.Max(GetHeight(node.Left), GetHeight(node.Right));
+        node.Height = 1 + Math.Max(GetHeight(node.Left), GetHeight(node.Right));
 
         return Balance(node);
     }
@@ -93,8 +81,8 @@ public class AVLTree
         x.Right = y;
         y.Left = T2;
 
-        y.Height = Mathf.Max(GetHeight(y.Left), GetHeight(y.Right)) + 1;
-        x.Height = Mathf.Max(GetHeight(x.Left), GetHeight(x.Right)) + 1;
+        y.Height = Math.Max(GetHeight(y.Left), GetHeight(y.Right)) + 1;
+        x.Height = Math.Max(GetHeight(x.Left), GetHeight(x.Right)) + 1;
 
         return x;
     }
@@ -107,8 +95,8 @@ public class AVLTree
         y.Left = x;
         x.Right = T2;
 
-        x.Height = Mathf.Max(GetHeight(x.Left), GetHeight(x.Right)) + 1;
-        y.Height = Mathf.Max(GetHeight(y.Left), GetHeight(y.Right)) + 1;
+        x.Height = Math.Max(GetHeight(x.Left), GetHeight(x.Right)) + 1;
+        y.Height = Math.Max(GetHeight(y.Left), GetHeight(y.Right)) + 1;
 
         return y;
     }

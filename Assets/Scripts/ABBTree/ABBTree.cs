@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 public class ABBTree
 {
     public Node root { get; private set; }
-
-    private Node selectedParentNode;
 
     public string PreOrderList;
     public string InOrderList;
@@ -17,7 +15,7 @@ public class ABBTree
         root = Insert(root, value, 0);
     }
 
-    private Node Insert(Node node, int value, int depth)
+    protected virtual Node Insert(Node node, int value, int depth)
     {
         if (node == null)
         {
@@ -50,68 +48,8 @@ public class ABBTree
         }
         else
         {
-            return (1 + Mathf.Max(GetTreeHeight(node.Left), GetTreeHeight(node.Right)));
+            return (1 + Math.Max(GetTreeHeight(node.Left), GetTreeHeight(node.Right)));
         }
-    }
-
-    private Node FindInTree(int value, Node node)
-    {
-        Node temp = node;
-
-        if (value > node.Value)
-        {
-            return FindInTree(value, node.Right);
-        }
-        else if (value < node.Value)
-        {
-            return FindInTree(value, node.Left);
-        }
-        else if (value == node.Value)
-        {
-            return node;
-        }
-
-        return null;
-    }
-
-    private int FindNodeDepth(int value, Node node, int depth)
-    {
-        if (value > node.Value)
-        {
-            depth++;
-            return FindNodeDepth(value, node.Right, depth);
-        }
-        else if (value < node.Value)
-        {
-            depth++;
-            return FindNodeDepth(value, node.Left, depth);
-        }
-        else if (value == node.Value)
-        {
-            return depth;
-        }
-
-        return 0;
-    }
-
-    public Node FindParent(int value, Node node)
-    {
-        if (value > node.Value)
-        {
-            selectedParentNode = node;
-            return FindParent(value, node.Right);
-        }
-        else if (value < node.Value)
-        {
-            selectedParentNode = node;
-            return FindParent(value, node.Left);
-        }
-        else if (value == node.Value)
-        {
-            return selectedParentNode;
-        }
-
-        return null;
     }
 
     private void PreOrder(Node node)

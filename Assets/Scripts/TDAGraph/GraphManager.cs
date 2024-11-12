@@ -52,25 +52,28 @@ public class GraphManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!LevelManager.Instance.isOpen)
         {
-            RaycastHit2D hit = CastRay();
-            if (hit.collider == null) return;
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit2D hit = CastRay();
+                if (hit.collider == null) return;
 
-            TravelToPlanet(hit);
-        }
+                TravelToPlanet(hit);
+            }
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            RaycastHit2D hit = CastRay();
-            if (hit.collider == null) return;
+            if (Input.GetMouseButtonDown(1))
+            {
+                RaycastHit2D hit = CastRay();
+                if (hit.collider == null) return;
 
-            ShowPlanetConnections(hit);
-        }
+                ShowPlanetConnections(hit);
+            }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetShip();
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                ResetShip();
+            }
         }
     }
 
@@ -251,7 +254,7 @@ public class GraphManager : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
         if (hit.collider != null)
         {
-            //Debug.Log(hit.collider.gameObject.name);
+            Debug.Log(hit.collider.gameObject.name);
         }
 
         return hit;

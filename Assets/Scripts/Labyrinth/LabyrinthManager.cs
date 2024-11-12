@@ -38,7 +38,7 @@ public class LabyrinthManager : MonoBehaviour
         startNode = FindVertexWithValue((int)startCoordinates.x, (int)startCoordinates.y);
         nodeArray[(int)startCoordinates.x, (int)startCoordinates.y].GetComponent<SpriteRenderer>().color = Color.green;
 
-        //pointer.position = nodeArray[(int)startNode.Row, (int)startNode.Column].transform.position;
+        pointer.position = nodeArray[(int)startNode.Row, (int)startNode.Column].transform.position;
     }
 
     private void Update()

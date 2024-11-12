@@ -1,23 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using static UnityEditor.Progress;
 
 public class StaticSet<T> : TDAGroup<T>
 {
     private T[] elements;
 
-    public StaticSet(int arraySize)
+    public StaticSet(int arraySize) //Static sets needs to know how many elements it will store.
     {
         elements = new T[arraySize];
     }
 
-    public override bool Add(T item)
+    public override bool Add(T item) //Adds element to group.
     {
         if (Contains(item)) return false;
 
         for (int i = 0; i < elements.Length; i++)
         {
-            if (EqualityComparer<T>.Default.Equals(elements[i], default(T)))
+            if (EqualityComparer<T>.Default.Equals(elements[i], default(T))) //Only adds it to the array position if its current value is the default/null.
             {
                 elements[i] = item;
                 return true;
@@ -26,12 +27,22 @@ public class StaticSet<T> : TDAGroup<T>
         return false;
     }
 
-    public override int Cardinality()
+    public override int Cardinality() //Returns the amount of elements in the group that aren't null/default.
     {
-        return elements.Length;
+        int cardinality = 0;
+
+        for (int i = 0; i < elements.Length; i++)
+        {
+            if (!EqualityComparer<T>.Default.Equals(elements[i], default(T)))
+            {
+                cardinality++;
+            }
+        }
+
+        return cardinality;
     }
 
-    public override bool Contains(T item)
+    public override bool Contains(T item) //Checks if the element is in the group.
     {
         for(int i = 0;i < elements.Length;i++)
         {
@@ -44,11 +55,11 @@ public class StaticSet<T> : TDAGroup<T>
         return false;
     }
 
-    public override bool IsEmpty()
+    public override bool IsEmpty() //Checks if the group is empty.
     {
         for (int i = 0; i < elements.Length; i++)
         {
-            if (elements[i] != null)
+            if (!EqualityComparer<T>.Default.Equals(elements[i], default(T)))
             {
                 return false;
             }
@@ -57,7 +68,7 @@ public class StaticSet<T> : TDAGroup<T>
         return true;
     }
 
-    public override bool Remove(T item)
+    public override bool Remove(T item) //Removes element from group by moving the last element from the array to its position, and making the last position the default/null value.
     {
         if (Contains(item))
         {
@@ -82,7 +93,7 @@ public class StaticSet<T> : TDAGroup<T>
     {
         for (int i = elements.Length - 1; i >= 0; i--)
         {
-            if (elements[i] != null)
+            if (!EqualityComparer<T>.Default.Equals(elements[i], default(T)))
             {
                 return i;
             }
@@ -91,7 +102,7 @@ public class StaticSet<T> : TDAGroup<T>
         return -1;
     }
 
-    public override string Show()
+    public override string Show() //Fills a string with all the elements in the group.
     {
         string text = "Static Set Contents: \n";
 

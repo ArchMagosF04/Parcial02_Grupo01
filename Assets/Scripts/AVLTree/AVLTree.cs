@@ -32,7 +32,7 @@ public class AVLTree : ABBTree
         return Balance(node);
     }
 
-    private Node Balance(Node node)
+    private Node Balance(Node node) //Checks the current balance of the tree and rotates accordingly.
     {
         int balanceFactor = GetBalance(node);
 
@@ -61,7 +61,7 @@ public class AVLTree : ABBTree
         return node;
     }
 
-    private int GetBalance(Node node)
+    private int GetBalance(Node node) //Returns the balance of the tree.
     {
         if (node == null) return 0;
         return GetHeight(node.Left) - GetHeight(node.Right);

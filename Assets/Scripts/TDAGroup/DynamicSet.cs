@@ -12,7 +12,7 @@ public class DynamicSet<T> : TDAGroup<T>
 
     }
 
-    public override bool Add(T item)
+    public override bool Add(T item) //Adds element to group.
     {
         if (!Contains(item))
         {
@@ -22,7 +22,7 @@ public class DynamicSet<T> : TDAGroup<T>
         return false;
     }
 
-    public override bool Remove(T item)
+    public override bool Remove(T item) //Removes element from group.
     {
         if (Contains(item))
         {
@@ -32,12 +32,12 @@ public class DynamicSet<T> : TDAGroup<T>
         return false;
     }
 
-    public override bool Contains(T item)
+    public override bool Contains(T item) //Checks if the element is in the group.
     {
         return elements.Contains(item);
     }
 
-    public override string Show()
+    public override string Show() //Fills a string with all the elements in the group.
     {
         string text = "Dynamic Set Contents: \n";
 
@@ -49,12 +49,12 @@ public class DynamicSet<T> : TDAGroup<T>
         return text;
     }
 
-    public override int Cardinality()
+    public override int Cardinality() //Returns the amount of elements in the group.
     {
         return elements.Count;
     }
 
-    public override bool IsEmpty()
+    public override bool IsEmpty() //Checks if the group is empty.
     {
         if (elements.Count == 0)
         {

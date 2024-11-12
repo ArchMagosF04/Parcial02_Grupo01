@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AVLTree.unity
     guid: f01ee703cb6a3934a98af850245dcea1
+  - enabled: 1
+    path: Assets/Scenes/TDAGroup.unity
+    guid: 57d5bf70903276340a8d669405af8c96
+  - enabled: 1
+    path: Assets/Scenes/Graph.unity
+    guid: 90d13004c6858a848b033a441b861a80
+  - enabled: 1
+    path: Assets/Scenes/Labyrinth.unity
+    guid: aaa801129a3c63045b75d7c57fa6073f
   m_configObjects: {}

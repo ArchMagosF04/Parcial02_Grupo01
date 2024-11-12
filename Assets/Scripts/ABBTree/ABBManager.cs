@@ -53,23 +53,24 @@ public class ABBManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) //Show the tree in the console.
+        if (Input.GetKeyDown(KeyCode.Q)) //Show the Pre-Order text.
         {
             textBox.text = tree.ShowPreOrder();
         }
-        if (Input.GetKeyDown(KeyCode.W)) //Show the tree in the console.
+        if (Input.GetKeyDown(KeyCode.W)) //Show the In-Order text.
         {
             textBox.text = tree.ShowInOrder();
         }
-        if (Input.GetKeyDown(KeyCode.E)) //Show the tree in the console.
+        if (Input.GetKeyDown(KeyCode.E)) //Show the Post-Order text.
         {
             textBox.text = tree.ShowPostOrder();
         }
-        if (Input.GetKeyDown(KeyCode.R)) //Show the tree in the console.
+        if (Input.GetKeyDown(KeyCode.R)) //Show the tree height text.
         {
             textBox.text = "Tree Height: " + tree.GetTreeHeight(tree.root);
         }
-        if (shouldDrawLines)
+
+        if (shouldDrawLines)  //Shows the Raycast connections between nodes. Only if gizmos are turned on during playtime.
         {
             foreach (var ray in nodeConections)
             {
@@ -80,7 +81,6 @@ public class ABBManager : MonoBehaviour
 
     private void CreateTree(Node node, Vector3 position) //Instantiates nodes based on how they would be positioned in the tree (aproximatly).
     {
-
         if (tree.root != null)
         {
             GameObject temp = Instantiate(nodePrefab);

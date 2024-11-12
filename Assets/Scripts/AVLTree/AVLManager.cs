@@ -54,7 +54,7 @@ public class AVLManager : MonoBehaviour
 
     public void Update()
     {
-        if (shouldDrawLines)
+        if (shouldDrawLines) //Shows the Raycast connections between nodes. Only if gizmos are turned on during playtime.
         {
             foreach (var ray in nodeConections)
             {

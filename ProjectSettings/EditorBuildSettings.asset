@@ -6,6 +6,24 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Objetivos.unity
+    guid: 2c8bc92f4ea9e2c409dde6f9a319d36f
+  - enabled: 1
+    path: Assets/Scenes/Anotador_Notas.unity
+    guid: 60123b59a36448d4381f9e831e4489a6
+  - enabled: 1
+    path: Assets/Scenes/Puzzle.unity
+    guid: 6ce2ab3f01d25474a917061981545e93
+  - enabled: 1
+    path: Assets/Scenes/HighScore.unity
+    guid: dfe59108a576a1c41861c4508e5b55c6
+  - enabled: 1
+    path: Assets/Scenes/Inventory.unity
+    guid: e8c8465bd31fd6c468d98bb1b9dc40e9
+  - enabled: 1
+    path: Assets/Scenes/Tienda_Diccionario.unity
+    guid: 3571010d5ba241041a44dcc7f38674fe
+  - enabled: 1
     path: Assets/Scenes/ABBTree.unity
     guid: 6ecaec1b021a95944926837bc1e988af
   - enabled: 1
@@ -20,4 +38,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Labyrinth.unity
     guid: aaa801129a3c63045b75d7c57fa6073f
+  - enabled: 1
+    path: Assets/Scenes/ModularLabyrinth.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

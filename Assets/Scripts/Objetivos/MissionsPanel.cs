@@ -93,6 +93,6 @@ public class MissionsPanel : MonoBehaviour
     }
     private void PlayAgain() 
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(0);
     }
 }

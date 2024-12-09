@@ -19,6 +19,10 @@ public class TDAManager : MonoBehaviour
     [SerializeField] private List<int> startingDynamicValues = new List<int>();
     [SerializeField] private List<int> startingStaticValues = new List<int>();
 
+    [SerializeField] private GameObject panelTDAOptions;
+    [SerializeField] private GameObject helpText;
+    private bool secondTab = false;
+
     private StaticSet<int> staticSet;
     private DynamicSet<int> dynamicSet;
 
@@ -79,6 +83,26 @@ public class TDAManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             StaticDifference();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            ShowTDAOptions();
+        }
+    }
+
+    private void ShowTDAOptions()
+    {
+        if (!secondTab)
+        {
+            panelTDAOptions.SetActive(true);
+            helpText.SetActive(false);
+            secondTab = true;
+        }
+        else 
+        {
+            secondTab = false;
+            panelTDAOptions.SetActive(false);
+            helpText.SetActive(true);
         }
     }
 

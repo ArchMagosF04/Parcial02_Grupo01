@@ -10,7 +10,10 @@ public class Annotator : MonoBehaviour
 {
     private TextMeshProUGUI annotatorText;
     [SerializeField]private TextMeshProUGUI sheetText;
-    private Queue<string> inputs = new Queue<string>();
+
+    private Queue<string> inputsWriting = new Queue<string>();
+    private List<string> inputs = new List<string>();
+   
     [SerializeField] private RectTransform writePointePosition;
     private bool Y_wasPressed = false;
     private float delay = 0.2f;
@@ -54,8 +57,8 @@ public class Annotator : MonoBehaviour
                     // Filtrar solo letras, números y algunos caracteres útiles.
                     if (IsValidKey(keyPressed))
                     {
-                        inputs.Enqueue(keyPressed);
-                        UpdateDisplay();
+                        inputsWriting.Enqueue(keyPressed);
+                        UpdateDisplayWriting();
                     }
                     break; // Salir del bucle tras detectar la primera tecla válida.
                 }
@@ -69,8 +72,8 @@ public class Annotator : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Backspace) && inputs.Count > 0)
             {
-                inputs.Dequeue();
-                UpdateDisplay();
+                inputs.RemoveAt(inputs.Count - 1);
+                ClearQueue();
             }
         }
     }
@@ -78,24 +81,27 @@ public class Annotator : MonoBehaviour
     private bool IsValidKey(string key)
     {
         // Filtrar teclas válidas (puedes expandir esta lista según sea necesario).
-        return key.Length == 1 || key == "" || key == "";
+        return key.Length == 1;
     }
 
-    private void UpdateDisplay()
+    private void UpdateDisplayWriting()
     {
-        // Mostrar el contenido del stack en el texto.
-        annotatorText.text = "";
-        foreach (var input in inputs)
+        annotatorText.text = ""; //primero se limpia lo q esta mostrado en pantalla para imprimierolo de 0
+        foreach (var item in inputsWriting)//recorrer la queue de inputs los agrega a una lista y a un stack. 
         {
-            annotatorText.text += input;
+            inputs.Add(item);
+        }
+        inputsWriting.Clear();//siempre se limpia la queue para evitar que se agren inputs viejos
+        for (int i = 0; i < inputs.Count; i++)//muesta en pantalla la lista de los caracteres.
+        {
+            annotatorText.text += inputs[i];
         }
     }
 
     public void ClearQueue()
     {
-        // Limpiar el stack y actualizar la visualización.
-        inputs.Clear();
-        UpdateDisplay();
+        inputsWriting.Clear();
+        UpdateDisplayWriting();
     }
 }
 

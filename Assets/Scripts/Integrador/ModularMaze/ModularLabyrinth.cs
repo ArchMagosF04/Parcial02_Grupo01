@@ -99,7 +99,7 @@ public class ModularLabyrinth : MonoBehaviour
         }
     }
 
-    private void Update() //Controls the player's inputs.
+    private void Update() //Controls the player's inputsWriting.
     {
         MovePointer();
         if (!isSearching) PointerActions();

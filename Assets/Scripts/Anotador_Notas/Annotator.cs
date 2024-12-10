@@ -10,7 +10,7 @@ public class Annotator : MonoBehaviour
 {
     private TextMeshProUGUI annotatorText;
     [SerializeField]private TextMeshProUGUI sheetText;
-    private Queue<string> inputs = new Queue<string>();
+    private Stack<string> inputs = new Stack<string>();
     [SerializeField] private RectTransform writePointePosition;
     private bool Y_wasPressed = false;
     private float delay = 0.2f;
@@ -19,6 +19,7 @@ public class Annotator : MonoBehaviour
     {
         annotatorText = GetComponentInChildren<TextMeshProUGUI>();
     }
+
     void Update()
     {
         StartWriting();
@@ -36,12 +37,14 @@ public class Annotator : MonoBehaviour
             }
         }
     }
+
     IEnumerator EnableWriting()
     {
         ClearQueue();
         yield return new WaitForSeconds(delay);
         Y_wasPressed = true;
     }
+
     void WritingInputs()
     {
         if (Y_wasPressed == true)
@@ -50,12 +53,20 @@ public class Annotator : MonoBehaviour
             {
                 if (Input.GetKeyDown(key))
                 {
+                    if (key == KeyCode.Space)
+                    {
+                        inputs.Push(" ");
+                        UpdateDisplay();
+                        break;
+                    }
+
                     string keyPressed = key.ToString();
                     // Filtrar solo letras, números y algunos caracteres útiles.
                     if (IsValidKey(keyPressed))
                     {
-                        inputs.Enqueue(keyPressed);
+                        inputs.Push(keyPressed);
                         UpdateDisplay();
+
                     }
                     break; // Salir del bucle tras detectar la primera tecla válida.
                 }
@@ -63,14 +74,15 @@ public class Annotator : MonoBehaviour
             //al precionar enter lo escrito es guardado en la hoja
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                sheetText.text += annotatorText.text;
+                sheetText.text += annotatorText.text + "\n";
                 ClearQueue();
+                Y_wasPressed = false;
             }
 
             if (Input.GetKeyDown(KeyCode.Backspace) && inputs.Count > 0)
             {
-                inputs.Dequeue();
-                UpdateDisplay();
+                inputs.Pop();
+                annotatorText.text = annotatorText.text.Remove(annotatorText.text.Length - 1);
             }
         }
     }
@@ -84,18 +96,15 @@ public class Annotator : MonoBehaviour
     private void UpdateDisplay()
     {
         // Mostrar el contenido del stack en el texto.
-        annotatorText.text = "";
-        foreach (var input in inputs)
-        {
-            annotatorText.text += input;
-        }
+        string temp = inputs.Peek();
+        annotatorText.text += temp;
     }
 
     public void ClearQueue()
     {
         // Limpiar el stack y actualizar la visualización.
         inputs.Clear();
-        UpdateDisplay();
+        annotatorText.text = "";
     }
 }
 

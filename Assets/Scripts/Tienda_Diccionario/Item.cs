@@ -32,7 +32,8 @@ public class Item : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textGoldValue;
     private bool belongsToTheShopScene = true;
 
-    private Button button;
+    private Button buttonPref;
+    public Button ButtonPref => buttonPref;
 
     public void SetItemVariables(string itemName, int goldValue, float weight, ItemType rarity)
     {
@@ -45,7 +46,6 @@ public class Item : MonoBehaviour
         textGoldValue.text = goldValue.ToString("c");
         textWeight.text = weight.ToString("F1") + "g";
         textRarity.text = rarity.ToString();
-        SetButtons();
     }
 
     public void SetItemVariables(string itemName, int goldValue, float weight, ItemType rarity, bool belongsToTheShopScene)
@@ -67,8 +67,8 @@ public class Item : MonoBehaviour
     {
         if (belongsToTheShopScene)
         {
-            button = GetComponentInChildren<Button>();
-            button.onClick.AddListener(ButtonAction);
+            buttonPref = GetComponentInChildren<Button>();
+            buttonPref.onClick.AddListener(ButtonAction);
         }      
     }
 

@@ -11,7 +11,6 @@ public class Annotator : MonoBehaviour
     private TextMeshProUGUI annotatorText;
     [SerializeField]private TextMeshProUGUI sheetText;
     private Stack<string> inputs = new Stack<string>();
-    [SerializeField] private RectTransform writePointePosition;
     private bool Y_wasPressed = false;
     private float delay = 0.2f;
 
@@ -33,7 +32,7 @@ public class Annotator : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Y))
             {
                 StartCoroutine(EnableWriting());
-                Debug.Log("you can start writing");
+                Debug.Log("you can start writing.");
             }
         }
     }
@@ -77,6 +76,7 @@ public class Annotator : MonoBehaviour
                 sheetText.text += annotatorText.text + "\n";
                 ClearQueue();
                 Y_wasPressed = false;
+                Debug.Log("Press Y to write.");
             }
 
             if (Input.GetKeyDown(KeyCode.Backspace) && inputs.Count > 0)
@@ -90,7 +90,7 @@ public class Annotator : MonoBehaviour
     private bool IsValidKey(string key)
     {
         // Filtrar teclas válidas (puedes expandir esta lista según sea necesario).
-        return key.Length == 1 || key == "" || key == "";
+        return key.Length == 1;
     }
 
     private void UpdateDisplay()

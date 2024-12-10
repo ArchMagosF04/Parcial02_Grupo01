@@ -49,8 +49,8 @@ public class ItemCreator : MonoBehaviour
         itemType.Add("Red Hood", ItemType.Attachment);
         itemType.Add("Sword", ItemType.Weapon);
         itemType.Add("Shield", ItemType.Armour);
-        itemType.Add("Speelbook: Necromancy", ItemType.Weapon);
-        itemType.Add("Speelbook: Elementalism", ItemType.Weapon);
+        itemType.Add("Speelbook:\nNecromancy", ItemType.Weapon);
+        itemType.Add("Speelbook:\nElementalism", ItemType.Weapon);
         itemType.Add("Speelbook:\nRadiant", ItemType.Weapon);
         itemType.Add("Speelbook:\nIllusion", ItemType.Weapon);
         itemType.Add("Speelbook:\nPsionic", ItemType.Weapon);

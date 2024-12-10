@@ -28,7 +28,7 @@ public class ShopManager : MonoBehaviour
 
     private void UpdateText()
     {
-        goldAmountText.text = "Gold: " + currentMoney;
+        goldAmountText.text = "Gold: $" + currentMoney;
     }
 
     public void TradeItem(Item item)

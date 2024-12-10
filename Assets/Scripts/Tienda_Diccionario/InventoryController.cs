@@ -8,7 +8,7 @@ using static UnityEditor.Progress;
 public class InventoryController : MonoBehaviour
 {
     public List<Item> inventory = new List<Item>();
-    [SerializeField] private Dictionary<string, ItemType> itemType = new Dictionary<string, ItemType>();
+    //[SerializeField] private Dictionary<string, ItemType> itemType = new Dictionary<string, ItemType>();
     [SerializeField] private List<string> itemsNames = new List<string>();
 
     [SerializeField] private bool shouldStartWithRandoms;
@@ -40,6 +40,7 @@ public class InventoryController : MonoBehaviour
             {
                 Item item = itemCreator.MakeItem();
                 inventory.Add(item);
+                //item.ButtonPref.onClick.AddListener(NameBubbleSort);
 
                 if (isShop)
                 {
